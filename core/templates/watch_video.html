@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Now Playing: {{ video.title }}</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f9fc;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            gap: 40px;
+        }
+
+        #videoWrapper {
+            flex: 2;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        #videoWrapper h1 {
+            font-size: 24px;
+            color: #333;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        #adPopup {
+            flex: 1;
+            display: none;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #007bff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        #adPopup h2 {
+            color: #007bff;
+            margin-top: 0;
+        }
+
+        #adPopup img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        #adPopup a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        #adPopup a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div id="videoWrapper">
+        <h1>{{ video.title }}</h1>
+        <video id="videoPlayer" controls>
+            <source src="{{ video.file.url }}" type="video/mp4">
+            Your browser doesn’t support the video tag.
+        </video>
+    </div>
+
+    <div id="adPopup">
+        <h2>Recommended for You</h2>
+        {% if popup_product %}
+            {% if popup_product.image_url %}
+                <img src="{{ popup_product.image_url }}" alt="{{ popup_product.name }}">
+            {% endif %}
+            <p><strong>{{ popup_product.name }}</strong></p>
+            {% if popup_product.buy_link %}
+                <a href="{{ popup_product.buy_link }}" target="_blank">Buy Now</a>
+            {% endif %}
+        {% else %}
+            <p>No recommendation found.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        const video = document.getElementById('videoPlayer');
+        const popup = document.getElementById('adPopup');
+        let popupShown = false;
+
+        // Check every 500ms if 10s has passed
+        const checkTime = setInterval(() => {
+            if (video.currentTime >= 10 && !popupShown) {
+                popup.style.display = 'block';
+                popupShown = true;
+            }
+        }, 500);
+
+        video.addEventListener('seeked', () => {
+            if (video.currentTime < 10) {
+                popup.style.display = 'none';
+                popupShown = false;
+            }
+        });
+    </script>
+</body>
+</html>
