@@ -55,12 +55,12 @@
     </style>
 </head>
 <body>
-    <h1>Select a User</h1>
+    <h1>Welcome to Plenitas! Please Select a User</h1>
     <div class="user-container">
         {% for user in users %}
             <div class="user-card">
                 <p>{{ user.name }}</p>
-                <a href="{% url 'watch_video' user.id 1 %}" class="user-button">Enter</a>
+                <a href="{% url 'select_video' user.id %}" class="user-button">Enter</a>
             </div>
         {% endfor %}
     </div>

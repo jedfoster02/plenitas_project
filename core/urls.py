@@ -2,6 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path('select_video/<int:user_id>/', views.select_video, name='select_video'),
     path('select_user/', views.select_user, name='select_user'),
     path('watch_video_redirect/', views.watch_video_redirect, name='watch_video_redirect'),
     path('recommend/<int:user_id>/', views.recommend_products, name='recommend'),

@@ -65,6 +65,27 @@
         #adPopup a:hover {
             background-color: #0056b3;
         }
+
+        #historySection {
+            margin-top: 40px;
+        }
+
+        #historySection h2 {
+            font-size: 20px;
+            color: #444;
+        }
+
+        ul.history-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.history-list li {
+            background: #f1f3f5;
+            margin-bottom: 8px;
+            padding: 10px 14px;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
@@ -74,6 +95,19 @@
             <source src="{{ video.file.url }}" type="video/mp4">
             Your browser doesn’t support the video tag.
         </video>
+
+        <div id="historySection">
+            <h2>Recently Watched</h2>
+            {% if history %}
+                <ul class="history-list">
+                    {% for h in history %}
+                        <li>{{ h.video.title }} ({{ h.watched_at|date:"M d, Y H:i" }})</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No history found.</p>
+            {% endif %}
+        </div>
     </div>
 
     <div id="adPopup">
@@ -96,7 +130,6 @@
         const popup = document.getElementById('adPopup');
         let popupShown = false;
 
-        // Check every 500ms if 10s has passed
         const checkTime = setInterval(() => {
             if (video.currentTime >= 10 && !popupShown) {
                 popup.style.display = 'block';

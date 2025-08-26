@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select a Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        .video-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .video-item {
+            padding: 15px;
+            background: #f1f1f1;
+            border-radius: 8px;
+            width: 250px;
+        }
+
+        .video-item a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ user.name }}. Choose a video to watch:</h1>
+    <div class="video-list">
+        {% for video in videos %}
+        <div class="video-item">
+            <p>{{ video.title }}</p>
+            <a href="{% url 'watch_video' user.id video.id %}">Watch Now</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
