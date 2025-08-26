@@ -2,8 +2,6 @@
 
 A lightweight Django prototype that shows **personalized product suggestions** while a user watches a video. After ~10 seconds of playback, a popup recommends a product aligned with the user’s interests.
 
-> Class project, quick to spin up, easy to read.
-
 ---
 
 ## Features
