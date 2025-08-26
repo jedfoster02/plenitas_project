@@ -41,4 +41,16 @@ pip install -r requirements.txt
 # pip install django python-dotenv
 
 # 4) Environment variables
-cp .env.example .e
+cp .env.example .env  # if provided
+# Otherwise create .env with at least:
+# DJANGO_SECRET_KEY=change-me
+# DEBUG=1
+# (Optional) DATABASE_URL=postgres://...
+
+# 5) DB setup
+python manage.py migrate
+python manage.py createsuperuser  # follow prompts
+
+# 6) Run
+python manage.py runserver
+# Visit http://127.0.0.1:8000
