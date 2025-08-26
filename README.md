@@ -26,7 +26,7 @@ A lightweight Django prototype that shows **personalized product suggestions** w
 
 ```bash
 # 1) Clone
-git clone https://github.com/<your-username>/plenitas_project.git
+git clone https://github.com/jedfoster02/plenitas_project.git
 cd plenitas_project
 
 # 2) Virtual env
